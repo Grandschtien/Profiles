@@ -7,7 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		608A461E286DDFB20000B45C /* ProfilesNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A461D286DDFB20000B45C /* ProfilesNetworkManager.swift */; };
+		608A461E286DDFB20000B45C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A461D286DDFB20000B45C /* NetworkManager.swift */; };
+		608A4620286DE7D20000B45C /* View+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A461F286DE7D20000B45C /* View+Layout.swift */; };
+		608A4622286DEA770000B45C /* ProfileCollectionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4621286DEA770000B45C /* ProfileCollectionAdapter.swift */; };
+		608A4624286E17EC0000B45C /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4623286E17EC0000B45C /* Decoder.swift */; };
+		608A4626286E1AE00000B45C /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4625286E1AE00000B45C /* Date+Extension.swift */; };
+		608A4628286E20060000B45C /* LocalProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4627286E20060000B45C /* LocalProfileModel.swift */; };
+		608A462D286EF9420000B45C /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A462B286EF9420000B45C /* ProfileCell.swift */; };
+		608A462E286EF9420000B45C /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 608A462C286EF9420000B45C /* ProfileCell.xib */; };
+		608A4631286EFB2A0000B45C /* ReuseIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4630286EFB2A0000B45C /* ReuseIdentifier.swift */; };
+		608A4633286EFBC90000B45C /* ImageView+Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4632286EFBC90000B45C /* ImageView+Download.swift */; };
+		608A4636286F06160000B45C /* ProfilesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 608A4634286F06160000B45C /* ProfilesModel.xcdatamodeld */; };
 		60D49DA8286DD73100BBDFB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D49DA7286DD73100BBDFB6 /* AppDelegate.swift */; };
 		60D49DAA286DD73100BBDFB6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D49DA9286DD73100BBDFB6 /* SceneDelegate.swift */; };
 		60D49DAF286DD73100BBDFB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60D49DAD286DD73100BBDFB6 /* Main.storyboard */; };
@@ -26,7 +36,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		608A461D286DDFB20000B45C /* ProfilesNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilesNetworkManager.swift; sourceTree = "<group>"; };
+		608A461D286DDFB20000B45C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		608A461F286DE7D20000B45C /* View+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Layout.swift"; sourceTree = "<group>"; };
+		608A4621286DEA770000B45C /* ProfileCollectionAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionAdapter.swift; sourceTree = "<group>"; };
+		608A4623286E17EC0000B45C /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		608A4625286E1AE00000B45C /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		608A4627286E20060000B45C /* LocalProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalProfileModel.swift; sourceTree = "<group>"; };
+		608A462B286EF9420000B45C /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		608A462C286EF9420000B45C /* ProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
+		608A4630286EFB2A0000B45C /* ReuseIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifier.swift; sourceTree = "<group>"; };
+		608A4632286EFBC90000B45C /* ImageView+Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageView+Download.swift"; sourceTree = "<group>"; };
+		608A4635286F06160000B45C /* ProfilesModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProfilesModel.xcdatamodel; sourceTree = "<group>"; };
 		60D49DA4286DD73100BBDFB6 /* Profiles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Profiles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D49DA7286DD73100BBDFB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60D49DA9286DD73100BBDFB6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +77,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		608A4629286EF4B90000B45C /* LocalModel */ = {
+			isa = PBXGroup;
+			children = (
+				608A4627286E20060000B45C /* LocalProfileModel.swift */,
+			);
+			path = LocalModel;
+			sourceTree = "<group>";
+		};
+		608A462A286EF4CF0000B45C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				60D49DC6286DD85C00BBDFB6 /* ProfilesProtocols.swift */,
+				60D49DD5286DDBBB00BBDFB6 /* ProfilesAssembly.swift */,
+				608A4621286DEA770000B45C /* ProfileCollectionAdapter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		608A462F286EF9470000B45C /* ProfileCell */ = {
+			isa = PBXGroup;
+			children = (
+				608A462B286EF9420000B45C /* ProfileCell.swift */,
+				608A462C286EF9420000B45C /* ProfileCell.xib */,
+			);
+			path = ProfileCell;
+			sourceTree = "<group>";
+		};
+		608A4637286F07ED0000B45C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				608A461F286DE7D20000B45C /* View+Layout.swift */,
+				608A4623286E17EC0000B45C /* Decoder.swift */,
+				608A4625286E1AE00000B45C /* Date+Extension.swift */,
+				608A4630286EFB2A0000B45C /* ReuseIdentifier.swift */,
+				608A4632286EFBC90000B45C /* ImageView+Download.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		60D49D9B286DD73100BBDFB6 = {
 			isa = PBXGroup;
 			children = (
@@ -92,10 +151,12 @@
 		60D49DBB286DD7A600BBDFB6 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				608A461D286DDFB20000B45C /* NetworkManager.swift */,
 				60D49DD3286DDB0700BBDFB6 /* Coordinator.swift */,
 				60D49DB0286DD73600BBDFB6 /* Assets.xcassets */,
 				60D49DAD286DD73100BBDFB6 /* Main.storyboard */,
 				60D49DB2286DD73600BBDFB6 /* LaunchScreen.storyboard */,
+				608A4637286F07ED0000B45C /* Extensions */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -112,11 +173,10 @@
 		60D49DBD286DD7BE00BBDFB6 /* ProfilesModule */ = {
 			isa = PBXGroup;
 			children = (
+				608A4629286EF4B90000B45C /* LocalModel */,
 				60D49DBF286DD7FA00BBDFB6 /* ProfilesViewController.swift */,
-				60D49DC6286DD85C00BBDFB6 /* ProfilesProtocols.swift */,
 				60D49DCA286DD8EA00BBDFB6 /* ProfilesViewModel.swift */,
-				60D49DD5286DDBBB00BBDFB6 /* ProfilesAssembly.swift */,
-				608A461D286DDFB20000B45C /* ProfilesNetworkManager.swift */,
+				608A462A286EF4CF0000B45C /* Helpers */,
 			);
 			path = ProfilesModule;
 			sourceTree = "<group>";
@@ -141,6 +201,7 @@
 		60D49DC4286DD81E00BBDFB6 /* CoreDataModels */ = {
 			isa = PBXGroup;
 			children = (
+				608A4634286F06160000B45C /* ProfilesModel.xcdatamodeld */,
 			);
 			path = CoreDataModels;
 			sourceTree = "<group>";
@@ -157,6 +218,7 @@
 		60D49DCE286DD90200BBDFB6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				608A462F286EF9470000B45C /* ProfileCell */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -220,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60D49DB4286DD73600BBDFB6 /* LaunchScreen.storyboard in Resources */,
+				608A462E286EF9420000B45C /* ProfileCell.xib in Resources */,
 				60D49DB1286DD73600BBDFB6 /* Assets.xcassets in Resources */,
 				60D49DAF286DD73100BBDFB6 /* Main.storyboard in Resources */,
 			);
@@ -232,18 +295,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				608A461E286DDFB20000B45C /* ProfilesNetworkManager.swift in Sources */,
+				608A461E286DDFB20000B45C /* NetworkManager.swift in Sources */,
+				608A4636286F06160000B45C /* ProfilesModel.xcdatamodeld in Sources */,
 				60D49DCB286DD8EA00BBDFB6 /* ProfilesViewModel.swift in Sources */,
 				60D49DD0286DDAA400BBDFB6 /* ProfilesModel.swift in Sources */,
+				608A4631286EFB2A0000B45C /* ReuseIdentifier.swift in Sources */,
+				608A4628286E20060000B45C /* LocalProfileModel.swift in Sources */,
 				60D49DCD286DD8FA00BBDFB6 /* UserInfoViewModel.swift in Sources */,
 				60D49DA8286DD73100BBDFB6 /* AppDelegate.swift in Sources */,
 				60D49DD2286DDAB300BBDFB6 /* UserInfoModel.swift in Sources */,
 				60D49DC2286DD80E00BBDFB6 /* UserInfoViewController.swift in Sources */,
 				60D49DD4286DDB0700BBDFB6 /* Coordinator.swift in Sources */,
 				60D49DC0286DD7FA00BBDFB6 /* ProfilesViewController.swift in Sources */,
+				608A4626286E1AE00000B45C /* Date+Extension.swift in Sources */,
 				60D49DAA286DD73100BBDFB6 /* SceneDelegate.swift in Sources */,
+				608A4633286EFBC90000B45C /* ImageView+Download.swift in Sources */,
+				608A4620286DE7D20000B45C /* View+Layout.swift in Sources */,
 				60D49DD6286DDBBB00BBDFB6 /* ProfilesAssembly.swift in Sources */,
+				608A4622286DEA770000B45C /* ProfileCollectionAdapter.swift in Sources */,
+				608A462D286EF9420000B45C /* ProfileCell.swift in Sources */,
 				60D49DC9286DD86700BBDFB6 /* UserInfoProtocols.swift in Sources */,
+				608A4624286E17EC0000B45C /* Decoder.swift in Sources */,
 				60D49DC7286DD85C00BBDFB6 /* ProfilesProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +536,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		608A4634286F06160000B45C /* ProfilesModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				608A4635286F06160000B45C /* ProfilesModel.xcdatamodel */,
+			);
+			currentVersion = 608A4635286F06160000B45C /* ProfilesModel.xcdatamodel */;
+			path = ProfilesModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 60D49D9C286DD73100BBDFB6 /* Project object */;
 }

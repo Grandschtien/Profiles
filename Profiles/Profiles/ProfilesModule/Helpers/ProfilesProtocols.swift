@@ -6,11 +6,11 @@
 //
 
 protocol ProfilesViewOutput: AnyObject {
-    func viewDidLoad()
+    func fetchProfiles(page: Int, batchSize: Int)
 }
 
 protocol ProfilesViewInput: AnyObject {
-
+    func loadedProfiles(_ profiles: [LocalProfileModel])
 }
 
 

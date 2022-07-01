@@ -8,5 +8,10 @@
 import Foundation
 
 struct UserInfoModel {
-    
+    let picture: Data
+    let name: String
+    let gender: Gender
+    let email: String
+    let birthDay: Date
+    let currentTime: Date
 }

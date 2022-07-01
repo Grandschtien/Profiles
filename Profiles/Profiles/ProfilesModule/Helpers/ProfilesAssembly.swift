@@ -15,7 +15,7 @@ final class ProfilesAssembly {
     }
     
     static func assemble() -> ProfilesAssembly {
-        let networkManager = ProfilesNetworkManager()
+        let networkManager = NetworkManager()
         let viewModel = ProfilesViewModel(networkManager: networkManager)
         let viewController = ProfilesViewController(output: viewModel)
         viewModel.view = viewController
