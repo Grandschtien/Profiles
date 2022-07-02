@@ -20,4 +20,9 @@ final class ProfileCell: UICollectionViewCell {
         nameLabel.text = name
         imageView.setImage(url: imageUrl)
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
 }

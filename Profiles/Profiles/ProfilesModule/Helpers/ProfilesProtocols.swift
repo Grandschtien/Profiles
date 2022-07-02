@@ -11,6 +11,7 @@ protocol ProfilesViewOutput: AnyObject {
 
 protocol ProfilesViewInput: AnyObject {
     func loadedProfiles(_ profiles: [LocalProfileModel])
+    func showErrorMessage(title: String, message: String)
 }
 
 

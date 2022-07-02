@@ -16,7 +16,9 @@ final class ProfilesAssembly {
     
     static func assemble() -> ProfilesAssembly {
         let networkManager = NetworkManager()
-        let viewModel = ProfilesViewModel(networkManager: networkManager)
+        let coreDataManager = СoreDataManager(modelName: .ProfilesModel)
+        let viewModel = ProfilesViewModel(networkManager: networkManager,
+                                          coreDataManager: coreDataManager)
         let viewController = ProfilesViewController(output: viewModel)
         viewModel.view = viewController
         return ProfilesAssembly(viewController: viewController)

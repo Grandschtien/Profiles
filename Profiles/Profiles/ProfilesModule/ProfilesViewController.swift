@@ -71,10 +71,16 @@ extension ProfilesViewController: ProfilesViewInput {
             profileCollectionAdapter.configure(profiles)
         }
     }
+    func showErrorMessage(title: String, message: String) {
+        Task {
+            presentAlert(withTitle: title, message: message)
+        }
+    }
 }
 
 extension ProfilesViewController: ProfileAdapterDelegate {
     func loadNetxtPage(page: Int) {
+        
         output.fetchProfiles(page: page, batchSize: batchSize)
     }
 }
