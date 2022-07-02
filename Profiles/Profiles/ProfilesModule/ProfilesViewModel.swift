@@ -6,17 +6,18 @@
 //
 
 import Foundation
-import CoreData
 
 final class ProfilesViewModel {
     weak var view: ProfilesViewInput?
     let networkManager: NetworkManagerProtocol
     let coreDataManager: СoreDataManagerProtocol
-    private var flag = false
+    let router: ProfileRouterInput
+    private var isAllLoaded = false
     init(networkManager: NetworkManagerProtocol,
-         coreDataManager: СoreDataManagerProtocol) {
+         coreDataManager: СoreDataManagerProtocol, router: ProfileRouterInput) {
         self.networkManager = networkManager
         self.coreDataManager = coreDataManager
+        self.router = router
     }
     
     func makeLocalModels(from model: ProfilesModel) -> [LocalProfileModel] {
@@ -65,6 +66,10 @@ final class ProfilesViewModel {
 }
 
 extension ProfilesViewModel: ProfilesViewOutput {
+    func showProfile(_ profile: LocalProfileModel) {
+        router.showProfileCard(profile)
+    }
+    
     func fetchProfiles(page: Int, batchSize: Int) {
         Task(priority: .high) {
             do {
@@ -73,39 +78,13 @@ extension ProfilesViewModel: ProfilesViewOutput {
                 let data = try await networkManager.fetchData(numberOfPage: page,
                                                               count: batchSize,
                                                               arguments: arguments)
-                coreDataManager.clearCacheFromCoreData(ProfileEntity.self)
                 guard let decoded = JSONDecoder.decodeData(ProfilesModel.self, data: data) else {
                     fatalError()
                 }
                 let localModels = makeLocalModels(from: decoded)
-                DispatchQueue.global(qos: .userInitiated).async {[weak self] in
-                    guard let `self` = self else { return }
-                    self.coreDataManager.createContainer { result in
-                        switch result {
-                        case .success(let container):
-                            let backContext = container.newBackgroundContext()
-                            for profile in localModels {
-                                let entity = ProfileEntity(context: backContext)
-                                entity.name = profile.name
-                                entity.dob = profile.dob
-                                entity.picture = profile.picture
-                                entity.localTime = profile.localTime
-                                entity.age = Int16(profile.age) ?? 0
-                                entity.email = profile.email
-                                entity.gender = profile.gender.rawValue
-                                do {
-                                    try backContext.save()
-                                } catch let error {
-                                    print(error.localizedDescription)
-                                }
-                            }
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        }
-                    }
-                }
+                self.coreDataManager.saveToCoreData(models: localModels)
                 view?.loadedProfiles(localModels)
-                flag = false
+                isAllLoaded = false
             } catch let networkError as URLError {
                 coreDataManager.createContainer {[weak self] result in
                     guard let `self` = self else {
@@ -113,26 +92,19 @@ extension ProfilesViewModel: ProfilesViewOutput {
                     }
                     switch result {
                     case .success(let container):
-                        let fetchResultsController: NSFetchedResultsController<ProfileEntity> = self.coreDataManager.setupFetchResultsController(
-                            for: container.viewContext,
-                            entityName: .ProfileEntity
-                        )
-                        do {
-                            try fetchResultsController.performFetch()
-                        } catch let error  {
-                            print(error.localizedDescription)
-                        }
-                        
-                        let cdModels = fetchResultsController.fetchedObjects
-                        if let cdModels = cdModels, !self.flag {
+                        let cdModels = self.coreDataManager.fetchResults(from: container,
+                                                                    entityName: .ProfileEntity,
+                                                                    modelType: ProfileEntity.self)
+                        if let cdModels = cdModels, !self.isAllLoaded {
                             let localModels = self.makeLocalModelsFromCoreDataEntities(cdModels)
                             self.view?.loadedProfiles(localModels)
-                            self.flag = true
+                            self.isAllLoaded = true
                         } else {
-                            print("Ошибка, в БД нет ничего, нужно кинуть ошибку, что нет инета и попросить подключиться к инету")
+                            print("[DEBUG]", "В базе данных ничего нет")
                         }
                     case .failure(let error):
-                        print(error.localizedDescription)
+                        self.view?.showErrorMessage(title: "Something goes wrong", message: error.localizedDescription)
+                        print("[DEBUG]", error.localizedDescription)
                     }
                 }
                 view?.showErrorMessage(title: "No intenet connection", message: networkError.localizedDescription)

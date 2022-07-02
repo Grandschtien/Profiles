@@ -7,26 +7,15 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 extension UIImageView {
     func setImage(url: URL?) {
-        let cacheManager = Cache<String, Data>()
         guard let url = url else {
             return
         }
-        if let data = cacheManager.value(forKey: url.absoluteString) {
-            self.image = UIImage(data: data)
-        } else {
-            Task {
-                do {
-                    let imageData = try await NetworkManager.loadPhoto(url: url)
-                    self.image = UIImage(data: imageData)
-                    cacheManager.insert(imageData, forKey: url.absoluteString)
-                } catch {
-                    print(error.localizedDescription)
-                    self.image = nil
-                }
-            }
-        }
+        let resource = ImageResource(downloadURL: url, cacheKey: url.absoluteString)
+        self.kf.setImage(with: resource, placeholder: UIImage(systemName: "person.fill"), options: [.cacheOriginalImage])
     }
+    
 }

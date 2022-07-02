@@ -7,6 +7,7 @@
 
 protocol ProfilesViewOutput: AnyObject {
     func fetchProfiles(page: Int, batchSize: Int)
+    func showProfile(_ profile: LocalProfileModel)
 }
 
 protocol ProfilesViewInput: AnyObject {
@@ -14,4 +15,6 @@ protocol ProfilesViewInput: AnyObject {
     func showErrorMessage(title: String, message: String)
 }
 
-
+protocol ProfileRouterInput: AnyObject {
+    func showProfileCard(_ profile: LocalProfileModel)
+}

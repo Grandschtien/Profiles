@@ -10,6 +10,7 @@ import UIKit
 
 protocol ProfileAdapterDelegate: AnyObject {
     func loadNetxtPage(page: Int)
+    func didTapOnProfile(profile: LocalProfileModel)
 }
 
 final class ProfileCollectionAdapter: NSObject {
@@ -21,7 +22,6 @@ final class ProfileCollectionAdapter: NSObject {
     typealias DataSource = UICollectionViewDiffableDataSource<Section, LocalProfileModel>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, LocalProfileModel>
     
-    var onItemSelected: (() -> Void)?
     private var items: [LocalProfileModel]
     //Weak refereces
     private weak var collectionView: UICollectionView?
@@ -68,7 +68,7 @@ extension ProfileCollectionAdapter: UICollectionViewDelegate {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        
+        delegate?.didTapOnProfile(profile: items[indexPath.row])
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == items.count - 1 {

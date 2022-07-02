@@ -79,8 +79,11 @@ extension ProfilesViewController: ProfilesViewInput {
 }
 
 extension ProfilesViewController: ProfileAdapterDelegate {
+    func didTapOnProfile(profile: LocalProfileModel) {
+        output.showProfile(profile)
+    }
     func loadNetxtPage(page: Int) {
-        
         output.fetchProfiles(page: page, batchSize: batchSize)
     }
+    
 }
