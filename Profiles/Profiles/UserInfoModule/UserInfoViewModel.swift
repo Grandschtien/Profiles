@@ -8,5 +8,16 @@
 import Foundation
 
 final class UserInfoViewModel {
+    weak var view: UserInfoViewInput?
+    private let profile: LocalProfileModel
     
+    init(profile: LocalProfileModel) {
+        self.profile = profile
+    }
+}
+
+extension UserInfoViewModel: UserInfoViewOutput {
+    func viewDidLoad() {
+        view?.presentProfile(profile)
+    }
 }

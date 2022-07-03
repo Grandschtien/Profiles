@@ -13,8 +13,10 @@ final class ProfilesViewModel {
     let coreDataManager: СoreDataManagerProtocol
     let router: ProfileRouterInput
     private var isAllLoaded = false
+    private var isAlertHasBeenShown = false
     init(networkManager: NetworkManagerProtocol,
-         coreDataManager: СoreDataManagerProtocol, router: ProfileRouterInput) {
+         coreDataManager: СoreDataManagerProtocol,
+         router: ProfileRouterInput) {
         self.networkManager = networkManager
         self.coreDataManager = coreDataManager
         self.router = router
@@ -30,7 +32,7 @@ final class ProfilesViewModel {
             let email = model.email
             let pictureURL = URL(string: model.picture.large)
             let gender = model.gender
-            let localTime = Date().getTime(withOffset: model.location.timezone.offset)
+            let localTime = model.location.timezone.offset
             let localModel = LocalProfileModel(name: name,
                                                email: email,
                                                dob: dobString,
@@ -73,11 +75,11 @@ extension ProfilesViewModel: ProfilesViewOutput {
     func fetchProfiles(page: Int, batchSize: Int) {
         Task(priority: .high) {
             do {
-                
                 let arguments: [Arguments] = [.name, .email, .picture, .dob, .gender, .location]
                 let data = try await networkManager.fetchData(numberOfPage: page,
                                                               count: batchSize,
                                                               arguments: arguments)
+                
                 guard let decoded = JSONDecoder.decodeData(ProfilesModel.self, data: data) else {
                     fatalError()
                 }
@@ -100,14 +102,17 @@ extension ProfilesViewModel: ProfilesViewOutput {
                             self.view?.loadedProfiles(localModels)
                             self.isAllLoaded = true
                         } else {
-                            print("[DEBUG]", "В базе данных ничего нет")
+                            debugPrint("[DEBUG]", "В базе данных ничего нет")
                         }
                     case .failure(let error):
-                        self.view?.showErrorMessage(title: "Something goes wrong", message: error.localizedDescription)
-                        print("[DEBUG]", error.localizedDescription)
+                        self.view?.showErrorMessage(title: "Something went wrong", message: error.localizedDescription)
+                        debugPrint("[DEBUG]", error.localizedDescription)
                     }
                 }
-                view?.showErrorMessage(title: "No intenet connection", message: networkError.localizedDescription)
+                if !isAlertHasBeenShown {
+                    view?.showErrorMessage(title: "No intenet connection", message: networkError.localizedDescription)
+                    isAlertHasBeenShown = true
+                }
             }
         }
     }

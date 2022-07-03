@@ -42,15 +42,12 @@ struct Dob: Codable {
 }
 
 enum Gender: String, Codable {
-    case female = "female"
-    case male = "male"
+    case female
+    case male
 }
 
 // MARK: - Location
 struct Location: Codable {
-//    let street: Street?
-//    let city, state, country: String?
-//    let coordinates: Coordinates?
     let timezone: Timezone
 }
 

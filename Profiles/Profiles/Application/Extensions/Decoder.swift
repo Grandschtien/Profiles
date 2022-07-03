@@ -10,12 +10,12 @@ import Foundation
 extension JSONDecoder {
     static func decodeData<T: Decodable>(_ model: T.Type, data: Data) -> T? {
         let decoder = JSONDecoder()
-//        do {
-            let decoded = try! decoder.decode(model, from: data)
+        do {
+            let decoded = try decoder.decode(model, from: data)
             return decoded
-//        } catch let error {
-//            print(error.localizedDescription)
-//            return nil
-//        }
+        } catch let error {
+            print(error.localizedDescription)
+            return nil
+        }
     }
 }

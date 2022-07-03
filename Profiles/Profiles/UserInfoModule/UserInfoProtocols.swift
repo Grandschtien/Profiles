@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+protocol UserInfoViewInput: AnyObject {
+    func presentProfile(_ profile: LocalProfileModel)
+}
+protocol UserInfoViewOutput: AnyObject {
+    func viewDidLoad()
+}
+
+protocol UserInfoRouterInput: AnyObject {
+    
+}

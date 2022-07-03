@@ -15,4 +15,9 @@ struct LocalProfileModel: Hashable {
     let localTime: String
     let picture: URL?
     let gender: Gender
+    var currentTime: String {
+        get {
+            return Date().getTime(withOffset: localTime)
+        }
+    }
 }

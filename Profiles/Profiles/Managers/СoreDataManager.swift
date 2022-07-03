@@ -10,11 +10,15 @@ import CoreData
  
 protocol СoreDataManagerProtocol: AnyObject {
     func createContainer(completion: @escaping (Result<NSPersistentContainer, Error>) -> ())
-    func setupFetchResultsController<T: NSManagedObject>(for context: NSManagedObjectContext,
-                                                                  entityName: EntityName) -> NSFetchedResultsController<T>
-    func fetchResults<T: NSManagedObject> (from container: NSPersistentContainer,
-                                           entityName: EntityName,
-                                           modelType: T.Type) -> [T]?
+    func setupFetchResultsController<T: NSManagedObject>(
+        for context: NSManagedObjectContext,
+        entityName: EntityName
+    ) -> NSFetchedResultsController<T>
+    func fetchResults<T: NSManagedObject> (
+        from container: NSPersistentContainer,
+        entityName: EntityName,
+        modelType: T.Type
+    ) -> [T]?
     func saveToCoreData(models: [LocalProfileModel]) 
 }
 
@@ -37,19 +41,27 @@ final class СoreDataManager: СoreDataManagerProtocol {
         }
     }
     
-    func setupFetchResultsController<T: NSManagedObject>(for context: NSManagedObjectContext,
-                                                         entityName: EntityName) -> NSFetchedResultsController<T> {
+    func setupFetchResultsController<T: NSManagedObject>(
+        for context: NSManagedObjectContext,
+        entityName: EntityName
+    ) -> NSFetchedResultsController<T> {
         let request = NSFetchRequest<T>(entityName: EntityName.ProfileEntity.rawValue)
         let sortDescriptor = NSSortDescriptor(key: "age", ascending: true)
         request.sortDescriptors = [sortDescriptor]
-        let fetchedResultController = NSFetchedResultsController<T>(fetchRequest: request,
-                                                                    managedObjectContext: context,
-                                                                    sectionNameKeyPath: nil,
-                                                                    cacheName: nil)
+        let fetchedResultController = NSFetchedResultsController<T>(
+            fetchRequest: request,
+            managedObjectContext: context,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
         return fetchedResultController
     }
     
-    func fetchResults<T: NSManagedObject> (from container: NSPersistentContainer, entityName: EntityName, modelType: T.Type) -> [T]? {
+    func fetchResults<T: NSManagedObject>(
+        from container: NSPersistentContainer,
+        entityName: EntityName, modelType:
+        T.Type
+    ) -> [T]? {
         let fetchResultsController: NSFetchedResultsController<T> = setupFetchResultsController(
             for: container.viewContext,
             entityName: entityName

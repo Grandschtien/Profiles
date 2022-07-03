@@ -14,7 +14,6 @@ protocol ProfileAdapterDelegate: AnyObject {
 }
 
 final class ProfileCollectionAdapter: NSObject {
-    
     enum Section {
         case main
     }
@@ -30,6 +29,7 @@ final class ProfileCollectionAdapter: NSObject {
     // stroed properties
     private lazy var dataSource: DataSource = setupDataSource()
     private let batchSize: Int
+    
     init(_ collectionView: UICollectionView, batchSize: Int) {
         self.collectionView = collectionView
         self.batchSize = batchSize
@@ -44,11 +44,14 @@ final class ProfileCollectionAdapter: NSObject {
     }
     private func setupDataSource() -> DataSource {
         guard let collectionView = collectionView else {
-            fatalError("Not collection in adapter")
+            fatalError("No collection in adapter")
         }
         let dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, profile) -> UICollectionViewCell in
             let cell = collectionView.dequeueCell(cellType: ProfileCell.self, for: indexPath)
             cell.configure(with: profile.picture, name: profile.name)
+            debugPrint("-----------------------------------------")
+            debugPrint("[DEBUG] name: \(profile.name), offset: \(profile.localTime), currentTime: \(profile.currentTime)")
+            debugPrint("-----------------------------------------")
             return cell
         }
         return dataSource
@@ -70,6 +73,7 @@ extension ProfileCollectionAdapter: UICollectionViewDelegate {
     ) {
         delegate?.didTapOnProfile(profile: items[indexPath.row])
     }
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == items.count - 1 {
             let page = (indexPath.row / batchSize) + 1

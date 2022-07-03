@@ -17,6 +17,10 @@ final class ProfileRouter {
 
 extension ProfileRouter: ProfileRouterInput {
     func showProfileCard(_ profile: LocalProfileModel) {
-        print(profile)
+        let userInfoAssembly = UserInfoAssembly.assebly(with: profile)
+        viewController?.navigationController?.pushViewController(
+            userInfoAssembly.viewController,
+            animated: true
+        )
     }
 }

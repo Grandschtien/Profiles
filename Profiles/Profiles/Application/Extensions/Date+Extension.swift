@@ -10,7 +10,7 @@ import Foundation
 extension DateFormatter {
     static let ddMMyy: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(abbreviation: "UTC") //TimeZone.current
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
         formatter.dateFormat = "dd.MM.yy"
         return formatter
     }()
