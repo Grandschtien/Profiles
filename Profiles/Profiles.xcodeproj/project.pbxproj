@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		603EA6DA2871A48F006710E3 /* UserInfoAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603EA6D92871A48F006710E3 /* UserInfoAssembly.swift */; };
+		603EA6DC2871E3E8006710E3 /* UserInfoStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603EA6DB2871E3E8006710E3 /* UserInfoStack.swift */; };
+		603EA6DE2871E567006710E3 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603EA6DD2871E567006710E3 /* UserInfoView.swift */; };
 		608A461E286DDFB20000B45C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A461D286DDFB20000B45C /* NetworkManager.swift */; };
 		608A4620286DE7D20000B45C /* View+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A461F286DE7D20000B45C /* View+Layout.swift */; };
 		608A4622286DEA770000B45C /* ProfileCollectionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A4621286DEA770000B45C /* ProfileCollectionAdapter.swift */; };
@@ -45,6 +47,8 @@
 		0499FE337676AD58DF8FD613 /* Pods_Profiles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Profiles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55DE0E1766C016140E672503 /* Pods-Profiles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Profiles.release.xcconfig"; path = "Target Support Files/Pods-Profiles/Pods-Profiles.release.xcconfig"; sourceTree = "<group>"; };
 		603EA6D92871A48F006710E3 /* UserInfoAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoAssembly.swift; sourceTree = "<group>"; };
+		603EA6DB2871E3E8006710E3 /* UserInfoStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStack.swift; sourceTree = "<group>"; };
+		603EA6DD2871E567006710E3 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		608A461D286DDFB20000B45C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		608A461F286DE7D20000B45C /* View+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Layout.swift"; sourceTree = "<group>"; };
 		608A4621286DEA770000B45C /* ProfileCollectionAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionAdapter.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 				60D49DC1286DD80E00BBDFB6 /* UserInfoViewController.swift */,
 				60D49DC8286DD86700BBDFB6 /* UserInfoProtocols.swift */,
 				60D49DCC286DD8FA00BBDFB6 /* UserInfoViewModel.swift */,
+				603EA6DD2871E567006710E3 /* UserInfoView.swift */,
 			);
 			path = UserInfoModule;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				608A462F286EF9470000B45C /* ProfileCell */,
+				603EA6DB2871E3E8006710E3 /* UserInfoStack.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -398,9 +404,11 @@
 				60D49DC2286DD80E00BBDFB6 /* UserInfoViewController.swift in Sources */,
 				60D49DD4286DDB0700BBDFB6 /* Coordinator.swift in Sources */,
 				60F0EEEB2870A60700D81059 /* ProfileRouter.swift in Sources */,
+				603EA6DE2871E567006710E3 /* UserInfoView.swift in Sources */,
 				60D49DC0286DD7FA00BBDFB6 /* ProfilesViewController.swift in Sources */,
 				608A4626286E1AE00000B45C /* Date+Extension.swift in Sources */,
 				60D49DAA286DD73100BBDFB6 /* SceneDelegate.swift in Sources */,
+				603EA6DC2871E3E8006710E3 /* UserInfoStack.swift in Sources */,
 				608A4633286EFBC90000B45C /* ImageView+Download.swift in Sources */,
 				608A4620286DE7D20000B45C /* View+Layout.swift in Sources */,
 				60D49DD6286DDBBB00BBDFB6 /* ProfilesAssembly.swift in Sources */,

@@ -96,7 +96,9 @@ extension ProfilesViewModel: ProfilesViewOutput {
                                                               arguments: arguments)
                 
                 guard let decoded = JSONDecoder.decodeData(ProfilesModel.self, data: data) else {
-                    fatalError()
+                    view?.showErrorMessage(title: "Decoder error",
+                                           message: "Cannot decode data, please, try to restart app")
+                    return
                 }
                 let localModels = makeLocalModels(from: decoded)
                 self.coreDataManager.saveToCoreData(models: localModels)
