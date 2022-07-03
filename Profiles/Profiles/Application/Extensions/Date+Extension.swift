@@ -8,6 +8,7 @@
 import Foundation
 
 extension DateFormatter {
+    /// Свойтство нужное чтобы получить DateFormatter в виде dd:MM:yy
     static let ddMMyy: DateFormatter = {
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -20,6 +21,10 @@ extension Date {
     func formatToString(using formatter: DateFormatter) -> String {
         return formatter.string(from: self)
     }
+    
+    /// Функция, возвращающая строку со временем, где включен отступ по времени offset (по дефолту 0:00)
+    /// - Parameter offset: Отступ в формате 0:00
+    /// - Returns: Строка со временем
     func getTime(withOffset offset: String = "0:00") -> String {
         let now = Date()
         let formatter = DateFormatter()

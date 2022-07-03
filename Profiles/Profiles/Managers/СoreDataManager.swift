@@ -12,12 +12,14 @@ protocol СoreDataManagerProtocol: AnyObject {
     func createContainer(completion: @escaping (Result<NSPersistentContainer, Error>) -> ())
     func setupFetchResultsController<T: NSManagedObject>(
         for context: NSManagedObjectContext,
-        entityName: EntityName
+        entityName: EntityName,
+        sortDescriptor: NSSortDescriptor
     ) -> NSFetchedResultsController<T>
-    func fetchResults<T: NSManagedObject> (
+    func fetchResults<T: NSManagedObject>(
         from container: NSPersistentContainer,
         entityName: EntityName,
-        modelType: T.Type
+        modelType: T.Type,
+        sort: (String, Bool)
     ) -> [T]?
     func saveToCoreData(models: [LocalProfileModel]) 
 }
@@ -28,6 +30,8 @@ final class СoreDataManager: СoreDataManagerProtocol {
         self.modelName = modelName
     }
     
+    /// Функция создания NSPersistentContainer
+    /// - Parameter completion: completion блок, аргумент которого и есть контейнер
     func createContainer(completion: @escaping (Result<NSPersistentContainer, Error>) -> ()) {
         let container = NSPersistentContainer(name: modelName.rawValue)
         container.loadPersistentStores { _, error in
@@ -41,12 +45,18 @@ final class СoreDataManager: СoreDataManagerProtocol {
         }
     }
     
+    /// Функция создания NSFetchedResultsController
+    /// - Parameters:
+    ///   - context: констекст NSManagedObjectContext
+    ///   - entityName: Название сущности
+    /// - Returns: Возвращает готовый контроллер
     func setupFetchResultsController<T: NSManagedObject>(
         for context: NSManagedObjectContext,
-        entityName: EntityName
+        entityName: EntityName,
+        sortDescriptor: NSSortDescriptor
     ) -> NSFetchedResultsController<T> {
         let request = NSFetchRequest<T>(entityName: EntityName.ProfileEntity.rawValue)
-        let sortDescriptor = NSSortDescriptor(key: "age", ascending: true)
+        let sortDescriptor = sortDescriptor
         request.sortDescriptors = [sortDescriptor]
         let fetchedResultController = NSFetchedResultsController<T>(
             fetchRequest: request,
@@ -57,14 +67,23 @@ final class СoreDataManager: СoreDataManagerProtocol {
         return fetchedResultController
     }
     
+    /// Функция получения данных из Core Data
+    /// - Parameters:
+    ///   - container: Контейнер NSPersistentContainer
+    ///   - entityName: Название сущности
+    ///   - modelType: Тип модели
+    ///   - sort: String - поле в модели, Bool - ascending у NSSortDescriptor
+    /// - Returns: Возвращает массив полученных данных
     func fetchResults<T: NSManagedObject>(
         from container: NSPersistentContainer,
-        entityName: EntityName, modelType:
-        T.Type
+        entityName: EntityName,
+        modelType: T.Type,
+        sort: (String, Bool)
     ) -> [T]? {
         let fetchResultsController: NSFetchedResultsController<T> = setupFetchResultsController(
             for: container.viewContext,
-            entityName: entityName
+            entityName: entityName,
+            sortDescriptor: makeSortDescriptor(field: sort.0, ascending: sort.1)
         )
         do {
             try fetchResultsController.performFetch()
@@ -75,6 +94,8 @@ final class СoreDataManager: СoreDataManagerProtocol {
         }
     }
     
+    /// Функция сохранения данных в Core Data
+    /// - Parameter models: Массив локальных моделей
     func saveToCoreData(models: [LocalProfileModel]) {
         createContainer { result in
             switch result {
@@ -92,19 +113,24 @@ final class СoreDataManager: СoreDataManagerProtocol {
                     do {
                         try backContext.save()
                     } catch let error {
-                        print("[DEBUG]", error.localizedDescription)
+                        debugPrint("[DEBUG]", error.localizedDescription)
                     }
                 }
             case .failure(let error):
-                print("[DEBUG]", error.localizedDescription)
+                debugPrint("[DEBUG]", error.localizedDescription)
             }
         }
+    }
+    
+    func makeSortDescriptor(field: String, ascending: Bool) -> NSSortDescriptor {
+        return NSSortDescriptor(key: field, ascending: ascending)
     }
     
     enum ModelName: String {
         case ProfilesModel
     }
 }
+
 enum EntityName: String {
     case ProfileEntity
 }

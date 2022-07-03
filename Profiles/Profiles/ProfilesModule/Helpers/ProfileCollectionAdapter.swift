@@ -42,6 +42,7 @@ final class ProfileCollectionAdapter: NSObject {
         self.items.append(contentsOf: items)
         applySnapshot()
     }
+    //MARK: - DataSource
     private func setupDataSource() -> DataSource {
         guard let collectionView = collectionView else {
             fatalError("No collection in adapter")

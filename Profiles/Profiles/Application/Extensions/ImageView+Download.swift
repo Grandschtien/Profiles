@@ -13,7 +13,12 @@ extension UIImageView {
         guard let url = url else {
             return
         }
-        let resource = ImageResource(downloadURL: url, cacheKey: url.absoluteString)
-        self.kf.setImage(with: resource, placeholder: UIImage(systemName: "person.fill"), options: [.cacheOriginalImage])
+        let resource = ImageResource(downloadURL: url,
+                                     cacheKey: url.absoluteString)
+        self.kf.setImage(
+            with: resource,
+            placeholder: UIImage(systemName: "person.fill"),
+            options: [.cacheOriginalImage]
+        )
     }
 }

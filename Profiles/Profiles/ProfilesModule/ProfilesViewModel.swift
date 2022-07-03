@@ -8,12 +8,15 @@
 import Foundation
 
 final class ProfilesViewModel {
+    //MARK: - view input
     weak var view: ProfilesViewInput?
+    //MARK: - properties
     let networkManager: NetworkManagerProtocol
     let coreDataManager: СoreDataManagerProtocol
     let router: ProfileRouterInput
     private var isAllLoaded = false
     private var isAlertHasBeenShown = false
+    //MARK: -  init
     init(networkManager: NetworkManagerProtocol,
          coreDataManager: СoreDataManagerProtocol,
          router: ProfileRouterInput) {
@@ -22,6 +25,9 @@ final class ProfilesViewModel {
         self.router = router
     }
     
+    /// Функция делает из моделей из сети локальные модели для передачи в адаптер
+    /// - Parameter model: модель из сети
+    /// - Returns: массив локальных моделй
     func makeLocalModels(from model: ProfilesModel) -> [LocalProfileModel] {
         var arrayOfLocalModels = [LocalProfileModel]()
         for model in model.profiles {
@@ -44,6 +50,10 @@ final class ProfilesViewModel {
         }
         return arrayOfLocalModels
     }
+    
+    /// Функция делает из моделей Core Data локальные модели
+    /// - Parameter entities: Сущность из Core Data
+    /// - Returns: Массив локальных моделей
     func makeLocalModelsFromCoreDataEntities(_ entities: [ProfileEntity]) -> [LocalProfileModel] {
         var arrayOfLocalModels = [LocalProfileModel]()
         for entity in entities {
@@ -68,10 +78,15 @@ final class ProfilesViewModel {
 }
 
 extension ProfilesViewModel: ProfilesViewOutput {
+    
     func showProfile(_ profile: LocalProfileModel) {
         router.showProfileCard(profile)
     }
     
+    /// Функция для похода в сеть и получения элементов на странице page с количеством batchSize
+    /// - Parameters:
+    ///   - page: Номер страницы
+    ///   - batchSize: Количество элементов на странице
     func fetchProfiles(page: Int, batchSize: Int) {
         Task(priority: .high) {
             do {
@@ -87,6 +102,7 @@ extension ProfilesViewModel: ProfilesViewOutput {
                 self.coreDataManager.saveToCoreData(models: localModels)
                 view?.loadedProfiles(localModels)
                 isAllLoaded = false
+                isAlertHasBeenShown = false
             } catch let networkError as URLError {
                 coreDataManager.createContainer {[weak self] result in
                     guard let `self` = self else {
@@ -94,9 +110,12 @@ extension ProfilesViewModel: ProfilesViewOutput {
                     }
                     switch result {
                     case .success(let container):
-                        let cdModels = self.coreDataManager.fetchResults(from: container,
-                                                                    entityName: .ProfileEntity,
-                                                                    modelType: ProfileEntity.self)
+                        let cdModels = self.coreDataManager.fetchResults(
+                            from: container,
+                            entityName: .ProfileEntity,
+                            modelType: ProfileEntity.self,
+                            sort: ("age", true)
+                        )
                         if let cdModels = cdModels, !self.isAllLoaded {
                             let localModels = self.makeLocalModelsFromCoreDataEntities(cdModels)
                             self.view?.loadedProfiles(localModels)
@@ -110,7 +129,8 @@ extension ProfilesViewModel: ProfilesViewOutput {
                     }
                 }
                 if !isAlertHasBeenShown {
-                    view?.showErrorMessage(title: "No intenet connection", message: networkError.localizedDescription)
+                    view?.showErrorMessage(title: "No intenet connection",
+                                           message: networkError.localizedDescription)
                     isAlertHasBeenShown = true
                 }
             }

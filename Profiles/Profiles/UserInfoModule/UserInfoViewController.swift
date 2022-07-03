@@ -31,6 +31,6 @@ final class UserInfoViewController: UIViewController {
 
 extension UserInfoViewController: UserInfoViewInput {
     func presentProfile(_ profile: LocalProfileModel) {
-        title = profile.name
+        
     }
 }
