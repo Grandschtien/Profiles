@@ -1,16 +1,20 @@
 PODS:
   - Kingfisher (7.1.2)
+  - SimpleImageViewer (1.1.1)
 
 DEPENDENCIES:
   - Kingfisher (~> 7.0)
+  - SimpleImageViewer (~> 1.1.1)
 
 SPEC REPOS:
   trunk:
     - Kingfisher
+    - SimpleImageViewer
 
 SPEC CHECKSUMS:
   Kingfisher: 44ed6a8504763f27bab46163adfac83f5deb240c
+  SimpleImageViewer: 34c3a2cde2d9ac022146772cefc27fca14b0c8b1
 
-PODFILE CHECKSUM: 2c669ac5cca54f2d018fe268fd5e3ea3707d81fe
+PODFILE CHECKSUM: 31508a6d663065453d490d44bea0c678bb9ceb1a
 
 COCOAPODS: 1.11.2

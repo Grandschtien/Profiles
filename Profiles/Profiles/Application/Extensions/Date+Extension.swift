@@ -47,16 +47,14 @@ extension Date {
             let timeInterval = TimeInterval(hour * 60 * 60 + minutes * 60)
             if let sign = offset.first {
                 switch sign {
-                case "+":
-                    let newDate = dateNow.addingTimeInterval(timeInterval)
-                    let resultDate = formatter.string(from: newDate)
-                    return resultDate
                 case "-":
                     let newDate = dateNow.addingTimeInterval(-timeInterval)
                     let resultDate = formatter.string(from: newDate)
                     return resultDate
                 default:
-                    fatalError("Unknown sign in date")
+                    let newDate = dateNow.addingTimeInterval(timeInterval)
+                    let resultDate = formatter.string(from: newDate)
+                    return resultDate
                 }
             }
         }

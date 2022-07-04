@@ -39,6 +39,11 @@ final class ProfileCollectionAdapter: NSObject {
     }
     
     func configure(_ items: [LocalProfileModel]) {
+        for item in items {
+            if self.items.contains(item) {
+                return
+            }
+        }
         self.items.append(contentsOf: items)
         applySnapshot()
     }

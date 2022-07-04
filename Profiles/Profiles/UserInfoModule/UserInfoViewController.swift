@@ -31,6 +31,14 @@ final class UserInfoViewController: UIViewController {
         view.addSubview(userView)
         userView.pins()
         view.backgroundColor = .systemBackground
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(pictureTapped))
+        userView.picture.addGestureRecognizer(tapRecognizer)
+        userView.picture.isUserInteractionEnabled = true
+    }
+    
+    @objc
+    func pictureTapped() {
+        output.openPicture(imageView: userView.picture)
     }
 }
 
@@ -40,6 +48,4 @@ extension UserInfoViewController: UserInfoViewInput {
         userView.setModel(profileModel: profile)
     }
 }
-
-
 

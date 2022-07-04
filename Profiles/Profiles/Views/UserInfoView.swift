@@ -15,7 +15,7 @@ final class UserInfoView: UIView {
         case localTime = "Текущее время"
     }
 
-    private lazy var picture: UIImageView = {
+    private(set) lazy var picture: UIImageView = {
         let picture = UIImageView()
         picture.translatesAutoresizingMaskIntoConstraints = false
         picture.contentMode = .scaleAspectFill
@@ -130,6 +130,7 @@ final class UserInfoView: UIView {
             localTimeStackView.heightAnchor.constraint(equalToConstant: self.frame.height / 14)
         ])
     }
+    
     private func setupUI(){
         picture.layer.cornerRadius = self.frame.height / 12
         picture.clipsToBounds = true

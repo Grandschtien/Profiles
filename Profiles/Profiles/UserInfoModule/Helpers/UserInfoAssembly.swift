@@ -16,8 +16,10 @@ final class UserInfoAssembly {
     }
     
     static func assebly(with profile: LocalProfileModel) -> UserInfoAssembly {
-        let viewModel = UserInfoViewModel(profile: profile)
+        let router = UserInfoRouter()
+        let viewModel = UserInfoViewModel(profile: profile, router: router)
         let viewController = UserInfoViewController(output: viewModel)
+        router.setViewController(viewController)
         viewModel.view = viewController
         
         return UserInfoAssembly(viewController: viewController)
